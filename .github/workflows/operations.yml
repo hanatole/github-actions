@@ -5,6 +5,10 @@ jobs:
   Checking:
     runs-on: ubuntu-24.04
     steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v5
+      - name: Listing content of the repo
+        run: ls -la
       - name: Run linter
         run: echo "Running the linter..."
       - name: Execute unit tests
