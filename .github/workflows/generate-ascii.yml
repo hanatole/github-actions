@@ -12,6 +12,7 @@ jobs:
   test:
     name: Test the generated file
     runs-on: ubuntu-24.04
+    needs: generate
     steps:
       - name: Make sure that the file is present
         run: test lion.txt
