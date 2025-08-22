@@ -1,0 +1,17 @@
+name: Generate ASCII Artwork
+on: push
+jobs:
+  ascii_job:
+    name: Generate
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v5
+      - name: Install Cowsay program
+        run: sudo apt-get install cowsay -y
+      - name: Execute the program
+        run: cowsay -f lion "I'm the King Lion" >> lion.txt
+      - name: Test the file
+        run: |
+          test lion.txt
+          cat lion.txt | grep "King Lion"
