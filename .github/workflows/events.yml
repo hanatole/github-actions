@@ -1,0 +1,21 @@
+name: Events
+on: push
+jobs:
+  First:
+    name: Run for all branch
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Echoing the name of the event
+        run: echo "This is ${{github.event_name}}"
+      - name: Status of the job
+        run: echo "The status of the job is ${{job.status}}"
+  Second:
+    name: Run only on branch main
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Packing
+        run: |
+          echo "This job runs only on branch main"
+          echo "The name of the current branch is ${{github.ref}}"
+      - name: Status of the job
+        run: echo "The status of the job is ${{job.status}}"
