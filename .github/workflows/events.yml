@@ -10,7 +10,7 @@ jobs:
   Second:
     name: Run only on branch main
     runs-on: ubuntu-24.04
-    if: github.ref_name == "main"
+    if: github.ref_name == 'main'
     steps:
       - name: Packing
         run: |
