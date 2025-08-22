@@ -1,2 +1,2 @@
 # github-actions
-Get started with Github actions
+Get started with GitHub actions

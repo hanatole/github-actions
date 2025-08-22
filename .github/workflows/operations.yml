@@ -1,0 +1,17 @@
+name: Operation workflow
+on: push
+
+jobs:
+  Checking:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Run linter
+        run: echo "Running the linter..."
+      - name: Execute unit tests
+        run: echo "Executing unit tests..."
+  Packaging:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Generate docker image
+        run: echo "Generating docker image..."
+
