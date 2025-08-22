@@ -7,11 +7,10 @@ jobs:
     steps:
       - name: Echoing the name of the event
         run: echo "This is ${{github.event_name}}"
-      - name: Status of the job
-        run: echo "The status of the job is ${{job.status}}"
   Second:
     name: Run only on branch main
     runs-on: ubuntu-24.04
+    if: github.ref_name == main
     steps:
       - name: Packing
         run: |
