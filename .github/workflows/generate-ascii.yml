@@ -9,14 +9,25 @@ jobs:
         run: |
           sudo apt-get install cowsay -y
           cowsay -f dragon "I'm the King Lion" >> lion.txt
+      - name: Upload the artifact
+        uses: actions/upload-artifact@v5
+        with:
+          name: lion-artifact
+          path: artifacts/file.txt
+      - name: List content  of the repo
+        run: ls -ltra
   test:
     name: Test the generated file
     runs-on: ubuntu-24.04
     needs: generate
     steps:
+      - name: Download the artifact
+        uses: actions/download-artifact@v5
+        with:
+          name: lion-artifact
       - name: Make sure that the file is present
-        run: test lion.txt
+        run: test file.txt
       - name: Display and test the content of the file
         run: |
-          cat lion.txt
-          cat lion.txt | grep "King Lion"
+          cat file.txt
+          cat file.txt | grep "King Lion"
