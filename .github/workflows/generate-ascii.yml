@@ -10,7 +10,7 @@ jobs:
       - name: Install Cowsay program
         run: sudo apt-get install cowsay -y
       - name: Execute the program
-        run: cowsay -f lion "I'm the King Lion" >> lion.txt
+        run: cowsay -f dragon "I'm the King Lion" >> lion.txt
       - name: Test the file
         run: |
           test lion.txt
