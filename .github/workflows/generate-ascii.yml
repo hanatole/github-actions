@@ -10,7 +10,7 @@ jobs:
           sudo apt-get install cowsay -y
           cowsay -f dragon "I'm the King Lion" >> lion.txt
       - name: Upload the artifact
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v4
         with:
           name: lion-artifact
           path: artifacts/file.txt
