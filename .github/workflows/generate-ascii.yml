@@ -12,8 +12,8 @@ jobs:
       - name: Upload the artifact
         uses: actions/upload-artifact@v4
         with:
-          name: lion-artifact
-          path: artifacts/file.txt
+          name: my-artifact
+          path: lion.txt
       - name: List content  of the repo
         run: ls -ltra
   test:
@@ -24,10 +24,10 @@ jobs:
       - name: Download the artifact
         uses: actions/download-artifact@v5
         with:
-          name: lion-artifact
+          name: my-artifact
       - name: Make sure that the file is present
-        run: test file.txt
+        run: test lion.txt
       - name: Display and test the content of the file
         run: |
-          cat file.txt
-          cat file.txt | grep "King Lion"
+          cat lion.txt
+          cat lion.txt | grep "King Lion"
