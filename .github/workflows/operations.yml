@@ -13,13 +13,13 @@ jobs:
           python-version: '3.12'
       - name: Installing uv
         uses: astral-sh/setup-uv@v6
-        with:
-          version: 'latest'
       - name: Installing dependencies
         run: |
           uv install
-          pytest --version
-          ruff --version
+      - name: Test installation
+        run: |
+          uv run pytest --version
+          uv run ruff --version
   Packaging:
     runs-on: ubuntu-24.04
     steps:
