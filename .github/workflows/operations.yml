@@ -7,6 +7,12 @@ jobs:
     steps:
       - name: Checkout the repository
         uses: actions/checkout@v5
+      - name: Restore .venv
+        id: cache-venv
+        uses: actions/cache/restore@v4
+        with:
+          key: venv
+          path: .venv
       - name: Installing uv
         uses: astral-sh/setup-uv@v6
         with:
@@ -19,6 +25,11 @@ jobs:
           uv sync
           uv run ruff check .
           uv run pytest
+      - name: Save .venv
+        uses: actions/cache/save@v4
+        with:
+          key: ${{steps.cache-venv.outputs.cache-primary-key}}
+          path: .venv
 
   Packaging:
     runs-on: ubuntu-24.04
