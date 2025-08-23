@@ -7,25 +7,22 @@ jobs:
     steps:
       - name: Checkout the repository
         uses: actions/checkout@v5
-      - name: Checkout python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.12'
       - name: Installing uv
         uses: astral-sh/setup-uv@v6
         with:
           version: 'latest'
+          python-version: '3.12'
           enable-cache: true
           cache-dependency-glob: "**/pyproject.toml"
-      - name: Installing dependencies
+      - name: Execute Linting and Unit tests
         run: |
           uv sync
-      - name: Checking
-        run: |
           uv run ruff check .
           uv run pytest
+
   Packaging:
     runs-on: ubuntu-24.04
+    needs: Checking
     steps:
       - name: Generate docker image
         run: echo "Generating docker image..."
