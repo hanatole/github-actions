@@ -23,6 +23,7 @@ jobs:
   Packaging:
     runs-on: ubuntu-24.04
     needs: Checking
+    if: github.ref_name == 'main'
     steps:
       - name: Generate docker image
         run: echo "Generating docker image..."
