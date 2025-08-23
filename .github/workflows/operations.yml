@@ -14,8 +14,8 @@ jobs:
           python-version: '3.12'
           enable-cache: true
           cache-dependency-glob: |
-            "**/pyproject.toml"
-            "**/uv.lock"
+            pyproject.toml
+            uv.lock
       - name: Execute Linting and Unit tests
         run: |
           uv sync
