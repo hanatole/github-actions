@@ -7,12 +7,19 @@ jobs:
     steps:
       - name: Checkout the repository
         uses: actions/checkout@v5
-      - name: Listing content of the repo
-        run: ls -ltra
-      - name: Run linter
-        run: echo "Running the linter..."
-      - name: Execute unit tests
-        run: echo "Executing unit tests..."
+      - name: Checkout python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Installing uv
+        uses: astral-sh/setup-uv@v6
+        with:
+          version: 'latest'
+      - name: Installing dependencies
+        run: |
+          uv install
+          pytest --version
+          ruff --version
   Packaging:
     runs-on: ubuntu-24.04
     steps:
