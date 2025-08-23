@@ -14,15 +14,16 @@ jobs:
       - name: Installing uv
         uses: astral-sh/setup-uv@v6
         with:
+          version: 'latest'
           enable-cache: true
           cache-dependency-glob: "**/pyproject.toml"
       - name: Installing dependencies
         run: |
           uv sync
-      - name: Test installation
+      - name: Checking
         run: |
-          uv run pytest --version
-          uv run ruff --version
+          uv run ruff check .
+          uv run pytest
   Packaging:
     runs-on: ubuntu-24.04
     steps:
