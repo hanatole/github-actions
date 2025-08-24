@@ -4,7 +4,35 @@ on: push
 jobs:
   Checking:
     runs-on: ubuntu-24.04
+    env:
+      POSTGRES_DB: database
+      POSTGRES_USER: database
+      POSTGRES_PASSWORD: database
+      POSTGRES_HOST: localhost
+
+    services:
+      database:
+        image: postgres:17.5-alpine3.21
+        ports:
+          - 5432:5432
+        env:
+          POSTGRES_DB: ${{env.POSTGRES_DB}}
+          POSTGRES_USER: ${{env.POSTGRES_USER}}
+          POSTGRES_PASSWORD: ${{env.POSTGRES_PASSWORD}}
+        options: >-
+          --health-cmd="pg_isready -U $POSTGRES_USER -d $POSTGRES_DB"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+
     steps:
+      - name: Wait for Database
+        run: |
+          until pg_isready -h $POSTGRES_HOST -U $POSTGRES_USER -d $POSTGRES_DB; do
+            echo "Waiting for postgres..."
+            sleep 2
+          done
+
       - name: Checkout the repository
         uses: actions/checkout@v5
       - name: Installing uv
